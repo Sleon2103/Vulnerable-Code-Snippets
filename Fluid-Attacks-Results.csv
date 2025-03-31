@@ -1,0 +1,475 @@
+title,cwe,description,cvss,cvss_v4,finding,stream,kind,where,snippet,method
+097. Reverse tabnabbing,CWE-1022,"Use of window.open() method without ""noopener, noreferrer"" window features allows target page to change the contents of original page in my_app/PostMessage Security/challenge1.js",CVSS:3.1/AV:A/AC:L/PR:N/UI:R/S:U/C:N/I:L/A:N/E:U/RL:O/RC:C,CVSS:4.0/AV:A/AT:N/AC:L/PR:N/UI:A/VC:N/VI:L/SC:N/SI:N/SA:N/VA:N/E:U,https://help.fluidattacks.com/portal/en/kb/articles/criteria-vulnerabilities-097,skims,SAST,85,"
+  83 | function open_window() {
+  84 |  if (window_ref == null || window_ref.closed) {
+> 85 |   window_ref = window.open (RECEIVE_URL, ""score board"", ""height=260,width=550"");
+  86 |
+  87 |   if (window_ref == null) {
+  88 |    alert (""Failed to open window. You must allow pop-ups."");
+  89 |   }
+  90 |  }
+  91 | }
+     ^ Col 0
+",javascript.javascript_has_reverse_tabnabbing
+063. Lack of data validation - Path Traversal,CWE-22,The application has functionality vulnerable to path traversal in my_app/File Inclusion/lfi1.php,CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:N/A:N/E:U/RL:O/RC:C,CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:L/VI:N/VA:N/SC:N/SI:N/SA:N/E:U,https://help.fluidattacks.com/portal/en/kb/articles/criteria-vulnerabilities-063,skims,SAST,11,"
+   1 | <?php     include(""../common/header.php"");   ?>
+   2 |
+   3 | <!-- from https://pentesterlab.com/exercises/php_include_and_post_exploitation/course -->
+   4 | <?php hint(""will include the arg specified in the GET parameter \""page\""""); ?>
+   5 |
+   6 | <form action=""/LFI-1/index.php"" method=""GET"">
+   7 |     <input type=""text"" name=""page"">
+   8 | </form>
+   9 |
+  10 | <?php
+> 11 | include($_GET[""page""]);
+  12 | ?>
+     ^ Col 0
+",php.php_unsafe_path_traversal
+063. Lack of data validation - Path Traversal,CWE-22,The application has functionality vulnerable to path traversal in my_app/File Inclusion/lfi11.php,CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:N/A:N/E:U/RL:O/RC:C,CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:L/VI:N/VA:N/SC:N/SI:N/SA:N/E:U,https://help.fluidattacks.com/portal/en/kb/articles/criteria-vulnerabilities-063,skims,SAST,11,"
+   1 | <!-- from http://hakipedia.com/index.php/Local_File_Inclusion -->
+   2 | <?php     include(""../common/header.php"");   ?>
+   3 |
+   4 | <?php hint(""not everything you need to play with is in a text field""); ?>
+   5 |
+   6 | <form action=""/LFI-11/index.php"" method=""POST"">
+   7 |     <input type=""text"" name=""file"">
+   8 |     <input type=""hidden"" name=""style"" name=""stylepath"">
+   9 | </form>
+  10 |
+> 11 | <?php include($_POST['stylepath']); ?>
+     ^ Col 0
+",php.php_unsafe_path_traversal
+063. Lack of data validation - Path Traversal,CWE-22,The application has functionality vulnerable to path traversal in my_app/File Inclusion/lfi12.php,CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:N/A:N/E:U/RL:O/RC:C,CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:L/VI:N/VA:N/SC:N/SI:N/SA:N/E:U,https://help.fluidattacks.com/portal/en/kb/articles/criteria-vulnerabilities-063,skims,SAST,11,"
+   1 | <!-- from http://hakipedia.com/index.php/Local_File_Inclusion -->
+   2 | <?php     include(""../common/header.php"");   ?>
+   3 |
+   4 | <?php hint(""not everything you need to play with is in a text field""); ?>
+   5 |
+   6 | <form action=""/LFI-12/index.php"" method=""GET"">
+   7 |     <input type=""text"" name=""file"">
+   8 |     <input type=""hidden"" name=""style"" name=""stylepath"">
+   9 | </form>
+  10 |
+> 11 | <?php include($_GET['stylepath']); ?>
+     ^ Col 0
+",php.php_unsafe_path_traversal
+063. Lack of data validation - Path Traversal,CWE-22,The application has functionality vulnerable to path traversal in my_app/File Inclusion/lfi2.php,CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:N/A:N/E:U/RL:O/RC:C,CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:L/VI:N/VA:N/SC:N/SI:N/SA:N/E:U,https://help.fluidattacks.com/portal/en/kb/articles/criteria-vulnerabilities-063,skims,SAST,11,"
+   1 | <?php     include(""../common/header.php"");   ?>
+   2 | <!-- from http://www.ush.it/2009/02/08/php-filesystem-attack-vectors/ -->
+   3 |
+   4 | <?php hint(""will include the arg specified in the GET parameter \""library\"", appends .php to end, escape with NULL byte %
+   5 |
+   6 | <form action=""/LFI-2/index.php"" method=""GET"">
+   7 |     <input type=""text"" name=""library"">
+   8 | </form>
+   9 |
+  10 | <?php
+> 11 | include(""includes/"".$_GET['library']."".php"");
+  12 | ?>
+  13 |
+     ^ Col 0
+",php.php_unsafe_path_traversal
+063. Lack of data validation - Path Traversal,CWE-22,The application has functionality vulnerable to path traversal in my_app/File Inclusion/lfi4.php,CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:N/A:N/E:U/RL:O/RC:C,CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:L/VI:N/VA:N/SC:N/SI:N/SA:N/E:U,https://help.fluidattacks.com/portal/en/kb/articles/criteria-vulnerabilities-063,skims,SAST,12,"
+   1 | <?php     include(""../common/header.php"");   ?>
+   2 |
+   3 | <!-- from http://www.ush.it/2009/02/08/php-filesystem-attack-vectors/ -->
+   4 | <?php hint(""will include the arg specified in the GET parameter \""class\"", appends .php to end, defeat with NULL byte %00
+   5 |
+   6 |
+   7 | <form action=""/LFI-4/index.php"" method=""GET"">
+   8 |     <input type=""text"" name=""class"">
+   9 | </form>
+  10 |
+  11 | <?php
+> 12 | include('includes/class_'.addslashes($_GET['class']).'.php');
+  13 | ?>
+  14 |
+     ^ Col 0
+",php.php_unsafe_path_traversal
+063. Lack of data validation - Path Traversal,CWE-22,The application has functionality vulnerable to path traversal in my_app/File Inclusion/lfi6.php,CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:N/A:N/E:U/RL:O/RC:C,CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:L/VI:N/VA:N/SC:N/SI:N/SA:N/E:U,https://help.fluidattacks.com/portal/en/kb/articles/criteria-vulnerabilities-063,skims,SAST,13,"
+   1 | <?php     include(""../common/header.php"");   ?>
+   2 |
+   3 | <!-- from https://pentesterlab.com/exercises/php_include_and_post_exploitation/course -->
+   4 |
+   5 | <?php hint(""will include the arg specified in the POST parameter \""page\"""");  ?>
+   6 |
+   7 |
+   8 | <form action=""/LFI-6/index.php"" method=""POST"">
+   9 |     <input type=""text"" name=""page"">
+  10 | </form>
+  11 |
+  12 | <?php
+> 13 | include($_POST[""page""]);
+  14 | ?>
+     ^ Col 0
+",php.php_unsafe_path_traversal
+063. Lack of data validation - Path Traversal,CWE-22,The application has functionality vulnerable to path traversal in my_app/File Inclusion/lfi7.php,CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:N/A:N/E:U/RL:O/RC:C,CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:L/VI:N/VA:N/SC:N/SI:N/SA:N/E:U,https://help.fluidattacks.com/portal/en/kb/articles/criteria-vulnerabilities-063,skims,SAST,13,"
+   1 | <?php     include(""../common/header.php"");   ?>
+   2 |
+   3 | <!-- from http://www.ush.it/2009/02/08/php-filesystem-attack-vectors/ -->
+   4 |
+   5 | <?php hint(""will include the arg specified in the POST parameter \""library\"", appends .php to end, use null byte %00 to b
+   6 |
+   7 |
+   8 | <form action=""/LFI-7/index.php"" method=""POST"">
+   9 |     <input type=""text"" name=""library"">
+  10 | </form>
+  11 |
+  12 | <?php
+> 13 | include(""includes/"".$_POST['library']."".php"");
+  14 | ?>
+  15 |
+     ^ Col 0
+",php.php_unsafe_path_traversal
+063. Lack of data validation - Path Traversal,CWE-22,The application has functionality vulnerable to path traversal in my_app/File Inclusion/lfi9.php,CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:N/A:N/E:U/RL:O/RC:C,CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:L/VI:N/VA:N/SC:N/SI:N/SA:N/E:U,https://help.fluidattacks.com/portal/en/kb/articles/criteria-vulnerabilities-063,skims,SAST,12,"
+   1 | <?php     include(""../common/header.php"");   ?>
+   2 |
+   3 | <!-- from http://www.ush.it/2009/02/08/php-filesystem-attack-vectors/ -->
+   4 |
+   5 | <?php hint(""will include the arg specified in the POST parameter \""class\"", appends .php to end, defeat with NULL byte %0
+   6 |
+   7 | <form action=""/LFI-9/index.php"" method=""POST"">
+   8 |     <input type=""text"" name=""class"">
+   9 | </form>
+  10 |
+  11 | <?php
+> 12 | include('includes/class_'.addslashes($_POST['class']).'.php');
+  13 | ?>
+  14 |
+     ^ Col 0
+",php.php_unsafe_path_traversal
+063. Lack of data validation - Path Traversal,CWE-22,The application has functionality vulnerable to path traversal in my_app/Insecure File Uploads/Insomnihack_2019_l33t-hoster.php,CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:N/A:N/E:U/RL:O/RC:C,CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:L/VI:N/VA:N/SC:N/SI:N/SA:N/E:U,https://help.fluidattacks.com/portal/en/kb/articles/criteria-vulnerabilities-063,skims,SAST,66,"
+  58 |     }
+  59 |
+  60 |     $image_size = getimagesize($tmp_name);
+  61 |     if ($image_size[0] !== 1337 || $image_size[1] !== 1337) {
+  62 |         die(""lol noob, your pic is not l33t enough"");
+  63 |     }
+  64 |
+  65 |     $name = implode(""."", $parts);
+> 66 |     move_uploaded_file($tmp_name, $userdir . $name . ""."" . $ext);
+  67 | }
+  68 |
+  69 | echo ""<h3>Your <a href=$userdir>files</a>:</h3><ul>"";
+  70 | foreach(glob($userdir . ""*"") as $file) {
+  71 |     echo ""<li><a href='$file'>$file</a></li>"";
+  72 | }
+  73 | echo ""</ul>"";
+  74 |
+     ^ Col 0
+",php.php_unsafe_path_traversal
+063. Lack of data validation - Path Traversal,CWE-22,The application has functionality vulnerable to path traversal in my_app/Insecure File Uploads/example1.php,CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:N/A:N/E:U/RL:O/RC:C,CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:L/VI:N/VA:N/SC:N/SI:N/SA:N/E:U,https://help.fluidattacks.com/portal/en/kb/articles/criteria-vulnerabilities-063,skims,SAST,9,"
+   1 | <?php
+   2 |
+   3 | if( isset( $_POST[ 'Upload' ] ) ) {
+   4 |  // Where are we going to be writing to?
+   5 |  $target_path  = DVWA_WEB_PAGE_TO_ROOT . ""hackable/uploads/"";
+   6 |  $target_path .= basename( $_FILES[ 'uploaded' ][ 'name' ] );
+   7 |
+   8 |  // Can we move the file to the upload folder?
+>  9 |  if( !move_uploaded_file( $_FILES[ 'uploaded' ][ 'tmp_name' ], $target_path ) ) {
+  10 |   // No
+  11 |   $html .= '<pre>Your image was not uploaded.</pre>';
+  12 |  }
+  13 |  else {
+  14 |   // Yes!
+  15 |   $html .= ""<pre>{$target_path} succesfully uploaded!</pre>"";
+  16 |  }
+  17 | }
+     ^ Col 0
+",php.php_unsafe_path_traversal
+183. Debugging enabled in production,CWE-489,The Flask configuration has debug mode enabled in my_app/Command Injection/tainted.py,CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:L/I:L/A:L/E:U/RL:O/RC:C,CVSS:4.0/AT:P/AV:N/AC:L/PR:L/UI:N/VC:L/VI:L/VA:L/SC:N/SI:N/SA:N/E:U,https://help.fluidattacks.com/portal/en/kb/articles/criteria-vulnerabilities-183,skims,SAST,14,"
+   1 | import os
+   2 | from flask import Flask, request
+   3 | app = Flask(__name__)
+   4 |
+   5 | # curl -X GET ""http://localhost:5000/tainted7/touch%20HELLO""
+   6 | @app.route(""/tainted7/<something>"")
+   7 | def test_sources_7(something):
+   8 |
+   9 |     os.system(request.remote_addr)
+  10 |
+  11 |     return ""foo""
+  12 |
+  13 | if __name__ == ""__main__"":
+> 14 |  app.run(debug=True)
+     ^ Col 0
+",python.python_flask_debug_mode_enabled
+359. Sensitive information in source code - Credentials,CWE-521,Database connection uses hardcoded password in my_app/SQL Injection/sql.js,CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:L/I:N/A:N/E:U/RL:U/RC:R,CVSS:4.0/AV:N/AT:N/AC:H/PR:N/UI:N/VC:N/VI:N/VA:N/SC:L/SI:N/SA:N/E:U,https://help.fluidattacks.com/portal/en/kb/articles/criteria-vulnerabilities-359,skims,SAST,5,"
+   1 | var express = require('express')
+   2 |
+   3 | var app = express()
+   4 | const Sequelize = require('sequelize');
+>  5 | const sequelize = new Sequelize('database', 'username', 'password', {
+   6 |   dialect: 'sqlite',
+   7 |   storage: 'data/juiceshop.sqlite'
+   8 | });
+   9 |
+  10 | app.post('/login', function (req, res) {
+  11 |     sequelize.query('SELECT * FROM Products WHERE name LIKE ' +  req.body.username);
+  12 |   })
+     ^ Col 0
+",javascript.js_hardcoded_password
+083. XML injection (XXE),CWE-611,Access to external entities in XML parsing is enabled in my_app/XXE/xxe.js,CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:L/I:L/A:L/E:U/RL:O/RC:C,CVSS:4.0/AV:N/AT:N/AC:L/PR:L/UI:N/VC:L/VI:L/VA:L/SC:N/SI:N/SA:N/E:U,https://help.fluidattacks.com/portal/en/kb/articles/criteria-vulnerabilities-083,skims,SAST,8,"
+   6 | (req, res) => {
+   7 |     const XMLfile = req.files.products.data;
+>  8 |  const products = libxmljs.parseXmlString(XMLfile, {noent:true,noblanks:true})
+   9 |
+  10 |  products.root().childNodes().forEach(product => {
+  11 |   let newProduct = new db.Product()
+  12 |   newProduct.name = product.childNodes()[0].text()
+  13 |   newProduct.description = product.childNodes()[3].text()
+  14 |   newProduct.save()
+  15 |     });
+  16 |
+  17 |     res.send('Thanks')
+  18 | }
+     ^ Col 0
+",javascript.js_xml_parser
+004. Remote command execution,CWE-78,The system executes commands composed with inputs from external sources without proper validation in my_app/Command Injection/CVE-2019-16662.php,CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:C/C:H/I:H/A:H/E:U/RL:T/RC:R,CVSS:4.0/AV:N/AC:L/PR:N/UI:N/AT:N/VC:H/VI:H/VA:H/SC:L/SI:L/SA:L/E:U,https://help.fluidattacks.com/portal/en/kb/articles/criteria-vulnerabilities-004,skims,SAST,12,"
+   4 | /* check PHP Safe_Mode is off */
+   5 | if (ini_get('safe_mode')) {
+   6 |     $array['phpSafeMode'] = '<strong><font class=""bad"">Fail - php safe mode is on - turn it off before you proceed with t
+   7 | } else {
+   8 |     $array['phpSafeMode'] = '<strong><font class=""Good"">Pass - php safe mode is off</strong></font><br/>';
+   9 | }
+  10 | /* Test root account details */
+  11 | $rootTestCmd1 = 'sudo -S -u ' . $rootUname . ' chmod 0777 /home 2>&1';
+> 12 | exec($rootTestCmd1, $cmdOutput, $err);
+  13 | $homeDirPerms = substr(sprintf('%o', fileperms('/home')), -4);
+  14 | if ($homeDirPerms == '0777') {
+  15 |     $array['rootDetails'] = '<strong><font class=""Good"">Pass - root account details are good </strong></font><br/>';
+  16 | } else {
+  17 |     $array['rootDetails'] = '<strong><font class=""bad"">The root details provided have not passed: ' . $cmdOutput[0] . '</
+  18 | }
+  19 | // reset /home dir permissions
+  20 | $rootTestCmd2 = 'sudo -S -u ' . $rootUname . ' chmod 0755 /home 2>&1';
+     ^ Col 0
+",php.php_remote_command_execution
+004. Remote command execution,CWE-78,The system executes commands composed with inputs from external sources without proper validation in my_app/Command Injection/CVE-2019-16662.php,CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:C/C:H/I:H/A:H/E:U/RL:T/RC:R,CVSS:4.0/AV:N/AC:L/PR:N/UI:N/AT:N/VC:H/VI:H/VA:H/SC:L/SI:L/SA:L/E:U,https://help.fluidattacks.com/portal/en/kb/articles/criteria-vulnerabilities-004,skims,SAST,21,"
+   6 |     $array['phpSafeMode'] = '<strong><font class=""bad"">Fail - php safe mode is on - turn it off before you proceed with t
+   7 | } else {
+   8 |     $array['phpSafeMode'] = '<strong><font class=""Good"">Pass - php safe mode is off</strong></font><br/>';
+   9 | }
+  10 | /* Test root account details */
+  11 | $rootTestCmd1 = 'sudo -S -u ' . $rootUname . ' chmod 0777 /home 2>&1';
+  12 | exec($rootTestCmd1, $cmdOutput, $err);
+  13 | $homeDirPerms = substr(sprintf('%o', fileperms('/home')), -4);
+  14 | if ($homeDirPerms == '0777') {
+  15 |     $array['rootDetails'] = '<strong><font class=""Good"">Pass - root account details are good </strong></font><br/>';
+  16 | } else {
+  17 |     $array['rootDetails'] = '<strong><font class=""bad"">The root details provided have not passed: ' . $cmdOutput[0] . '</
+  18 | }
+  19 | // reset /home dir permissions
+  20 | $rootTestCmd2 = 'sudo -S -u ' . $rootUname . ' chmod 0755 /home 2>&1';
+> 21 | exec($rootTestCmd2, $cmdOutput, $err);
+  22 | echo json_encode($array);
+     ^ Col 0
+",php.php_remote_command_execution
+004. Remote command execution,CWE-78,The system executes commands composed with inputs from external sources without proper validation in my_app/Command Injection/cmd1.php,CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:C/C:H/I:H/A:H/E:U/RL:T/RC:R,CVSS:4.0/AV:N/AC:L/PR:N/UI:N/AT:N/VC:H/VI:H/VA:H/SC:L/SI:L/SA:L/E:U,https://help.fluidattacks.com/portal/en/kb/articles/criteria-vulnerabilities-004,skims,SAST,13,"
+   1 | <?php     include(""../common/header.php"");   ?>
+   2 |
+   3 | <!-- from https://pentesterlab.com/exercises/php_include_and_post_exploitation/course -->
+   4 | <?php
+   5 | hint(""will exec the arg specified in the GET parameter \""cmd\"""");
+   6 | ?>
+   7 |
+   8 | <form action=""/CMD-1/index.php"" method=""GET"">
+   9 |     <input type=""text"" name=""cmd"">
+  10 | </form>
+  11 |
+  12 | <?php
+> 13 |     system($_GET[""cmd""]);
+  14 |  ?>
+     ^ Col 0
+",php.php_remote_command_execution
+004. Remote command execution,CWE-78,The system executes commands composed with inputs from external sources without proper validation in my_app/Command Injection/cmd2.php,CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:C/C:H/I:H/A:H/E:U/RL:T/RC:R,CVSS:4.0/AV:N/AC:L/PR:N/UI:N/AT:N/VC:H/VI:H/VA:H/SC:L/SI:L/SA:L/E:U,https://help.fluidattacks.com/portal/en/kb/articles/criteria-vulnerabilities-004,skims,SAST,10,"
+   1 | <?php     include(""../common/header.php"");   ?>
+   2 | <!-- from https://pentesterlab.com/exercises/php_include_and_post_exploitation/course -->
+   3 | <?php  hint(""will exec the arg specified in the POST parameter \""cmd\""""); ?>
+   4 |
+   5 | <form action=""/CMD-2/index.php"" method=""POST"">
+   6 |     <input type=""text"" name=""cmd"">
+   7 | </form>
+   8 |
+   9 | <?php
+> 10 |     system($_POST[""cmd""]);
+  11 |  ?>
+     ^ Col 0
+",php.php_remote_command_execution
+004. Remote command execution,CWE-78,The system executes commands composed with inputs from external sources without proper validation in my_app/Command Injection/cmd3.php,CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:C/C:H/I:H/A:H/E:U/RL:T/RC:R,CVSS:4.0/AV:N/AC:L/PR:N/UI:N/AT:N/VC:H/VI:H/VA:H/SC:L/SI:L/SA:L/E:U,https://help.fluidattacks.com/portal/en/kb/articles/criteria-vulnerabilities-004,skims,SAST,14,"
+   1 | <?php     include(""../common/header.php"");   ?>
+   2 |
+   3 | <!-- from https://pentesterlab.com/exercises/php_include_and_post_exploitation/course -->
+   4 | <?php
+   5 | hint(""will exec 'whois' with the arg specified in the GET parameter \""domain\"""");
+   6 | ?>
+   7 |
+   8 | <form action=""/CMD-3/index.php"" method=""GET"">
+   9 |     Whois: <input type=""text"" name=""domain"">
+  10 | </form>
+  11 |
+  12 | <pre>
+  13 | <?php
+> 14 |     system(""/usr/bin/whois "" . $_GET[""domain""]);
+  15 |  ?>
+  16 | </pre>
+     ^ Col 0
+",php.php_remote_command_execution
+004. Remote command execution,CWE-78,The system executes commands composed with inputs from external sources without proper validation in my_app/Command Injection/cmd4.php,CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:C/C:H/I:H/A:H/E:U/RL:T/RC:R,CVSS:4.0/AV:N/AC:L/PR:N/UI:N/AT:N/VC:H/VI:H/VA:H/SC:L/SI:L/SA:L/E:U,https://help.fluidattacks.com/portal/en/kb/articles/criteria-vulnerabilities-004,skims,SAST,11,"
+   1 | <?php     include(""../common/header.php"");   ?>
+   2 | <!-- from https://pentesterlab.com/exercises/php_include_and_post_exploitation/course -->
+   3 | <?php  hint(""will exec 'whois' with the arg specified in the POST parameter \""domain\""""); ?>
+   4 |
+   5 | <form action=""/CMD-4/index.php"" method=""POST"">
+   6 |     <input type=""text"" name=""domain"">
+   7 | </form>
+   8 |
+   9 | <pre>
+  10 | <?php
+> 11 |     system(""whois "" . $_POST[""domain""]);
+  12 |  ?>
+  13 | </pre>
+     ^ Col 0
+",php.php_remote_command_execution
+004. Remote command execution,CWE-78,The system executes commands composed with inputs from external sources without proper validation in my_app/Command Injection/cmd5.php,CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:C/C:H/I:H/A:H/E:U/RL:T/RC:R,CVSS:4.0/AV:N/AC:L/PR:N/UI:N/AT:N/VC:H/VI:H/VA:H/SC:L/SI:L/SA:L/E:U,https://help.fluidattacks.com/portal/en/kb/articles/criteria-vulnerabilities-004,skims,SAST,13,"
+   2 | <!-- from https://pentesterlab.com/exercises/php_include_and_post_exploitation/course -->
+   3 | <?php  hint(""not everything you need to inject is in a text input field ...""); ?>
+   4 |
+   5 | <form action=""/CMD-5/index.php"" method=""GET"">
+   6 |     <input type=""text"" name=""domain"">
+   7 |     <input type=""hidden"" name=""server"" value=""whois.publicinterestregistry.net"">
+   8 | </form>
+   9 |
+  10 | <pre>
+  11 | <?php
+  12 | if (preg_match('/^[-a-z0-9]+\.a[cdefgilmnoqrstuwxz]|b[abdefghijmnorstvwyz]|c[acdfghiklmnoruvxyz]|d[ejkmoz]|e[cegrstu]|f[i
+> 13 |         { system(""whois -h "" . $_GET[""server""] . "" "" . $_GET[""domain""]); }
+  14 |     else
+  15 |         {echo ""malformed domain name"";}
+  16 |
+  17 |  ?>
+  18 | </pre>
+     ^ Col 0
+",php.php_remote_command_execution
+004. Remote command execution,CWE-78,The system executes commands composed with inputs from external sources without proper validation in my_app/Command Injection/cmd6.php,CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:C/C:H/I:H/A:H/E:U/RL:T/RC:R,CVSS:4.0/AV:N/AC:L/PR:N/UI:N/AT:N/VC:H/VI:H/VA:H/SC:L/SI:L/SA:L/E:U,https://help.fluidattacks.com/portal/en/kb/articles/criteria-vulnerabilities-004,skims,SAST,13,"
+   2 | <!-- from https://pentesterlab.com/exercises/php_include_and_post_exploitation/course -->
+   3 | <?php  hint(""not everything you need to inject is in a text input field ...""); ?>
+   4 |
+   5 | <form action=""/CMD-6/index.php"" method=""POST"">
+   6 |     <input type=""text"" name=""domain"">
+   7 |     <input type=""hidden"" name=""server"" value=""whois.publicinterestregistry.net"">
+   8 | </form>
+   9 |
+  10 | <pre>
+  11 | <?php
+  12 | if (preg_match('/^[-a-z0-9]+\.a[cdefgilmnoqrstuwxz]|b[abdefghijmnorstvwyz]|c[acdfghiklmnoruvxyz]|d[ejkmoz]|e[cegrstu]|f[i
+> 13 |         { system(""whois -h "" . $_POST[""server""] . "" "" . $_POST[""domain""]); }
+  14 |     else
+  15 |         {echo ""malformed domain name"";}
+  16 |
+  17 |  ?>
+  18 | </pre>
+     ^ Col 0
+",php.php_remote_command_execution
+004. Remote command execution,CWE-78,The system executes commands composed with inputs from external sources without proper validation in my_app/Command Injection/exec.js,CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:C/C:H/I:H/A:H/E:U/RL:T/RC:R,CVSS:4.0/AV:N/AC:L/PR:N/UI:N/AT:N/VC:H/VI:H/VA:H/SC:L/SI:L/SA:L/E:U,https://help.fluidattacks.com/portal/en/kb/articles/criteria-vulnerabilities-004,skims,SAST,8,"
+   7 | (req,res) => {
+>  8 |     exec(`${req.body.url}`, (error) => {
+   9 |         if (error) {
+  10 |             return res.send('error');
+  11 |         }
+  12 |         res.send('pong')
+  13 |     })
+  14 |
+  15 | }
+     ^ Col 0
+",javascript.javascript_remote_command_execution
+004. Remote command execution,CWE-78,The system executes commands composed with inputs from external sources without proper validation in my_app/Command Injection/exec.js,CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:C/C:H/I:H/A:H/E:U/RL:T/RC:R,CVSS:4.0/AV:N/AC:L/PR:N/UI:N/AT:N/VC:H/VI:H/VA:H/SC:L/SI:L/SA:L/E:U,https://help.fluidattacks.com/portal/en/kb/articles/criteria-vulnerabilities-004,skims,SAST,19,"
+  17 | (req,res) => {
+  18 |     exec(
+> 19 |         'gzip ' + req.query.file_path,
+  20 |         function (err, data) {
+  21 |           console.log('err: ', err)
+  22 |           console.log('data: ', data);
+  23 |           res.send('done');
+  24 |     });
+  25 | }
+     ^ Col 0
+",javascript.javascript_remote_command_execution
+008. Reflected cross-site scripting (XSS),CWE-79,The web application dynamically generates web content without validating the source of the potentially untrusted data in my_app/XSS/dom.php,CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:N/I:L/A:N/E:U/RL:O/RC:R,CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:A/VC:H/VI:L/VA:L/SC:L/SI:L/SA:L/E:U,https://help.fluidattacks.com/portal/en/kb/articles/criteria-vulnerabilities-008,skims,SAST,11,"
+   3 | ?>
+   4 | <html>
+   5 |   <!-- From https://portswigger.net/web-security/dom-based/dom-clobbering -->
+   6 |   <head>
+   7 |
+   8 |   </head>
+   9 |   <body>
+  10 |     <p>
+> 11 |       Hi, <?= $_GET['name']; ?>
+  12 |     </p>
+  13 |     <script>
+  14 |       window.onload = function(){
+  15 |         let someObject = window.someObject || {};
+  16 |         let script = document.createElement('script');
+  17 |         script.src = someObject.url;
+  18 |         document.body.appendChild(script);
+  19 |      };
+     ^ Col 0
+",php.php_unsafe_xss_content
+001. SQL injection - C Sharp SQL API,CWE-89,Use of user controlled parameters for querying the database in my_app/SQL Injection/SQLi.cs,CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:L/A:N/E:U/RL:O/RC:C,CVSS:4.0/AV:N/AC:L/AT:N/PR:L/UI:N/VC:N/VI:L/VA:N/SC:N/SI:N/SA:N/E:U,https://help.fluidattacks.com/portal/en/kb/articles/criteria-vulnerabilities-001,skims,SAST,25,"
+  21 | [HttpGet(""{id}"")]
+  22 |         public string DoSqli(string id)
+  23 |         {
+  24 |             string conString = ""I AM a connection String"";
+> 25 |             using (SqlCommand cmd = new SqlCommand(""SELECT * FROM users WHERE userId = '"" + id + ""'""))
+  26 |             {
+  27 |                 using (SqlConnection con = new SqlConnection(conString))
+  28 |                 {
+  29 |                     con.Open();
+  30 |                     cmd.Connection = con;
+  31 |                     SqlDataReader reader = cmd.ExecuteReader();
+  32 |                     string res = """";
+  33 |                     while (reader.Read())
+  34 |                     {
+  35 |                         res += reader[""userName""];
+  36 |                     }
+  37 |                     return res;
+  38 |                 }
+  39 |             }
+  40 |         }
+     ^ Col 0
+",c_sharp.c_sharp_sql_injection
+112. SQL injection - Java SQL API,CWE-89,Use of user controlled parameters for querying the database in my_app/SQL Injection/mysql.js,CVSS:3.1/AV:N/AC:H/PR:L/UI:N/S:U/C:L/I:L/A:L/E:U/RL:O/RC:R,CVSS:4.0/AV:N/AC:H/AT:N/PR:L/UI:N/SC:N/SI:N/SA:N/VC:L/VI:L/VA:L/E:U,https://help.fluidattacks.com/portal/en/kb/articles/criteria-vulnerabilities-112,skims,SAST,21,"
+  16 | (req,res) => {
+  17 |     let userId = req.params.id;
+  18 |     let query = {
+  19 |         sql : ""SELECT * FROM users WHERE id="" + userId
+  20 |     }
+> 21 |     connection.query(query,(err, result) => {
+  22 |         res.json(result);
+  23 |     });
+  24 | }
+     ^ Col 0
+",javascript.javascript_sql_api_injection
+112. SQL injection - Java SQL API,CWE-89,Use of user controlled parameters for querying the database in my_app/SQL Injection/mysql.js,CVSS:3.1/AV:N/AC:H/PR:L/UI:N/S:U/C:L/I:L/A:L/E:U/RL:O/RC:R,CVSS:4.0/AV:N/AC:H/AT:N/PR:L/UI:N/SC:N/SI:N/SA:N/VC:L/VI:L/VA:L/E:U,https://help.fluidattacks.com/portal/en/kb/articles/criteria-vulnerabilities-112,skims,SAST,28,"
+  26 | (req,res) => {
+  27 |     let userId = req.params.id;
+> 28 |     connection.query(""SELECT * FROM users WHERE id="" + userId,(err, result) => {
+  29 |         res.json(result);
+  30 |     });
+  31 | }
+     ^ Col 0
+",javascript.javascript_sql_api_injection
+112. SQL injection - Java SQL API,CWE-89,Use of user controlled parameters for querying the database in my_app/SQL Injection/mysql.js,CVSS:3.1/AV:N/AC:H/PR:L/UI:N/S:U/C:L/I:L/A:L/E:U/RL:O/RC:R,CVSS:4.0/AV:N/AC:H/AT:N/PR:L/UI:N/SC:N/SI:N/SA:N/VC:L/VI:L/VA:L/E:U,https://help.fluidattacks.com/portal/en/kb/articles/criteria-vulnerabilities-112,skims,SAST,35,"
+  33 | (req,res) => {
+  34 |     let userId = req.params.id;
+> 35 |     connection.query({
+  36 |         sql : ""SELECT * FROM users WHERE id="" +userId
+  37 |     },(err, result) => {
+  38 |         res.json(result);
+  39 |     });
+  40 | }
+     ^ Col 0
+",javascript.javascript_sql_api_injection
+Summary: 29 vulnerabilities were found in your targets.
